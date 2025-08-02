@@ -7,3 +7,18 @@ module.exports = buildModule("V2AdaptorModule",(m)=>{
 
     return {adopter}
 })
+
+/**
+ * 
+ * curl -X POST http://localhost:8020/ \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "subgraph_create",
+    "params": {
+      "name": "abdul/v2adaptor-subgraph"
+    }
+  }'
+
+ */

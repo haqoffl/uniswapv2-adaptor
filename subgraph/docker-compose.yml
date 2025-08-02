@@ -1,27 +1,44 @@
 version: "3"
 services:
-  graph-node:
-    image: graphprotocol/graph-node
-    ports:
-      - "8010:8010"  # GraphQL API
-      - "8020:8020"  # Admin API
-      - "8030:8030"  # IPFS API
-      - "8040:8040"  # Metrics
-    depends_on:
-      - postgres
-    environment:
-      postgres_host: postgres
-      postgres_user: graph
-      postgres_pass: letmein
-      postgres_db: graph
-      ethereum: arbitrum-fork:http://172.17.0.1:8545
-      RUST_LOG: info
-
   postgres:
-    image: postgres
+    image: postgres:15
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: graph
       POSTGRES_PASSWORD: letmein
       POSTGRES_DB: graph
+      PGDATA: "data/pgdata"
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
+    volumes:
+      - pgdata:/data/postgres
+
+  ipfs:
+    image: ipfs/go-ipfs:v0.17.0
+    ports:
+      - "5001:5001"
+    volumes:
+      - ipfsdata:/data/ipfs
+
+  graph-node:
+    image: graphprotocol/graph-node
+    depends_on:
+      - postgres
+      - ipfs
+    ports:
+      - "8000:8000"  # GraphQL API
+      - "8020:8020"  # Admin
+      - "8030:8030"  # Index Node
+      - "8040:8040"  # Metrics
+    environment:
+      postgres_host: postgres
+      postgres_user: graph
+      postgres_pass: letmein
+      postgres_db: graph
+      ipfs: http://ipfs:5001
+      ethereum: arbitrum-one:http://host.docker.internal:8545
+      RUST_LOG: info
+
+volumes:
+  pgdata:
+  ipfsdata:
