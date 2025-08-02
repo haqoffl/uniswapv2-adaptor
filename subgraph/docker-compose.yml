@@ -36,7 +36,7 @@ services:
       postgres_pass: letmein
       postgres_db: graph
       ipfs: http://ipfs:5001
-      ethereum: arbitrum-one:http://host.docker.internal:8545
+      ethereum: arbitrum-one:http://172.17.0.1:8545
       RUST_LOG: info
 
 volumes:
