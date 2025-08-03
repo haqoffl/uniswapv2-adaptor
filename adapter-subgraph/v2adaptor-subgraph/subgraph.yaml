@@ -8,9 +8,9 @@ dataSources:
     name: V2Adaptor
     network: arbitrum-one
     source:
-      address: "0x4b5e98b74D50FE8180ee1db8DB90C034F2b80510"
+      address: "0x30b91bAC592f8960B0c340C584230838B7ac095a"
       abi: V2Adaptor
-      startBlock: 364227550
+      startBlock: 364416830
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9

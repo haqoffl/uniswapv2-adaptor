@@ -1,8 +1,8 @@
 {
   "arbitrum-one": {
     "V2Adaptor": {
-      "address": "0x4b5e98b74D50FE8180ee1db8DB90C034F2b80510",
-      "startBlock": 364227550
+      "address": "0x30b91bAC592f8960B0c340C584230838B7ac095a",
+      "startBlock": 364416830
     }
   }
 }
